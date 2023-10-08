@@ -6,6 +6,7 @@ namespace MOB.Framework.Game2D.UI
 {
     /// <summary>
     /// ダイアログ基底.
+    /// TODO: コード以外からのボタン作成対応.
     /// </summary>
     public abstract class DialogBase<TViewData> : MonoBehaviour
     {
