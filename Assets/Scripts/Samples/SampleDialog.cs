@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using MOB.Framework.Game2D.UI;
 
@@ -9,11 +10,13 @@ namespace MOB.Framework.Game2D.Samples
         {
             public string Title { get; set; }
             public string Body { get; set; }
+            
+            public IReadOnlyList<ButtonData> FooterButtonDataList { get; set; }
         }
         
         public override void Initialize(ViewData viewData)
         {
-            throw new System.NotImplementedException();
+            AddButtons(viewData.FooterButtonDataList);
         }
 
         public override UniTask Open()

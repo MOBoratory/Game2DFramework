@@ -14,9 +14,9 @@ namespace MOB.Framework.Game2D.UI
         [SerializeField]
         private TextMeshProUGUI _text;
 
-        public void Initialize(string text)
+        public void Initialize(ButtonData buttonData)
         {
-            _text.SetText(text);
+            _text.SetText(buttonData.Text);
         }
     }
 }
