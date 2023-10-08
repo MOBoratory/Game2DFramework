@@ -10,6 +10,11 @@ namespace MOB.Framework.Game2D.UI
     /// </summary>
     public abstract class DialogBase<TViewData> : MonoBehaviour
     {
+        public struct Response
+        {
+            public int Id { get; }
+        }
+        
         [SerializeField]
         protected RectTransform _footerButtonsParent;
         

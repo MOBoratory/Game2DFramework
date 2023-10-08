@@ -4,23 +4,27 @@ namespace MOB.Framework.Game2D.UI
 {
     public struct ButtonData
     {
-        public ButtonSizes ButtonSize { get; }
+        public int Id { get; }
         public string Text { get; }
+        public ButtonSizes Size { get; }
+        public ButtonTypes Type { get; }
 
-        public ButtonData(string text, ButtonSizes buttonSize)
+        public ButtonData(int id, string text, ButtonSizes size, ButtonTypes type)
         {
+            Id = id;
             Text = text;
-            ButtonSize = buttonSize;
+            Size = size;
+            Type = type;
         }
 
-        public static ButtonData CreateOK(ButtonSizes buttonSize)
+        public static ButtonData CreateOK(int id, ButtonSizes size, ButtonTypes type)
         {
-            return new ButtonData("OK", buttonSize);
+            return new ButtonData(id, "OK", size, type);
         }
 
-        public static ButtonData CreateClose(ButtonSizes buttonSize)
+        public static ButtonData CreateClose(int id, ButtonSizes size, ButtonTypes type)
         {
-            return new ButtonData("閉じる", buttonSize);
+            return new ButtonData(id, "閉じる", size, type);
         }
     }
 }
