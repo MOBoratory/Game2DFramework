@@ -16,15 +16,5 @@ namespace MOB.Framework.Game2D.UI
             Size = size;
             Type = type;
         }
-
-        public static ButtonData CreateOK(int id, ButtonSizes size, ButtonTypes type)
-        {
-            return new ButtonData(id, "OK", size, type);
-        }
-
-        public static ButtonData CreateClose(int id, ButtonSizes size, ButtonTypes type)
-        {
-            return new ButtonData(id, "閉じる", size, type);
-        }
     }
 }
