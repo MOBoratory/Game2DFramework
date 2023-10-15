@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -26,15 +27,16 @@ namespace MOB.Framework.Game2D.UI
         /// <summary>
         ///     ダイアログを表示します.
         /// </summary>
-        /// <param name="prefabPath">DialogのPrefabPath.</param>
         /// <param name="initializeData">初期化用データ.</param>
         /// <param name="parent">生成先となる親.</param>
+        /// <param name="ct">キャンセルトークン.</param>
         /// <typeparam name="TDialog">ダイアログ型.</typeparam>
         /// <typeparam name="TInitializeData">初期化用データ型.</typeparam>
         /// <returns>ダイアログを閉じた応答情報.</returns>
-        public static UniTask<DialogResponse> ShowDialogAsync<TDialog, TInitializeData>(
+        public static UniTask<DialogResult> ShowDialogAsync<TDialog, TInitializeData>(
             TInitializeData initializeData,
-            Transform parent)
+            Transform parent,
+            CancellationToken ct = default)
             where TInitializeData : struct
             where TDialog : Object, IDialog<TInitializeData>
         {
@@ -45,7 +47,7 @@ namespace MOB.Framework.Game2D.UI
             // ダイアログを初期化します.
             dialog.Initialize(initializeData);
 
-            return dialog.ShowAsync();
+            return dialog.ShowAsync(ct);
         }
     }
 }
