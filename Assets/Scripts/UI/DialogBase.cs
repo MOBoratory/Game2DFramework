@@ -134,6 +134,12 @@ namespace MOB.Framework.Game2D.UI
         /// <param name="buttonDataList">ボタン設定データリスト.</param>
         protected void AddButtons(IReadOnlyList<ButtonData> buttonDataList)
         {
+            if (buttonDataList == null)
+            {
+                Debug.LogWarning($"{nameof(buttonDataList)}がNull.");
+                return;
+            }
+
             foreach (ButtonData buttonData in buttonDataList) AddButton(buttonData);
         }
 
