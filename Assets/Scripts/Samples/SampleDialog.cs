@@ -3,9 +3,12 @@ using MOB.Framework.Game2D.UI;
 
 namespace MOB.Framework.Game2D.Samples
 {
-    public sealed class SampleDialog : DialogBase<SampleDialog.ViewData>, IDialog<SampleDialog.ViewData>
+    /// <summary>
+    ///     サンプルダイアログ.
+    /// </summary>
+    public sealed class SampleDialog : DialogBase<SampleDialog.InitializeData>
     {
-        public struct ViewData
+        public struct InitializeData
         {
             public string Title { get; set; }
             public string Body { get; set; }
@@ -13,9 +16,9 @@ namespace MOB.Framework.Game2D.Samples
             public IReadOnlyList<ButtonData> FooterButtonDataList { get; set; }
         }
 
-        public override void Initialize(ViewData viewData)
+        public override void Initialize(InitializeData initializeData)
         {
-            AddButtons(viewData.FooterButtonDataList);
+            AddButtons(initializeData.FooterButtonDataList);
         }
     }
 }

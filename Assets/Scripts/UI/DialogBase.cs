@@ -58,6 +58,10 @@ namespace MOB.Framework.Game2D.UI
         [SerializeField]
         private float _openAnimationDuration = 0.4f;
 
+        /// <summary>
+        ///     初期化を行います.
+        /// </summary>
+        /// <param name="initializeData">初期化用データ.</param>
         public abstract void Initialize(TInitializeData initializeData);
 
         /// <summary>
