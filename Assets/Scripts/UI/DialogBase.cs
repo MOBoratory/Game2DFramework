@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -46,16 +47,16 @@ namespace MOB.Framework.Game2D.UI
     public abstract class DialogBase<TInitializeData> : MonoBehaviour, IDialog<TInitializeData>
         where TInitializeData : struct
     {
+        /// <summary>
+        ///     ダイアログの結果を待機するオブジェクト.
+        /// </summary>
+        private readonly UniTaskCompletionSource<DialogResult> _dialogResultAwaiter = new();
+
         [SerializeField]
         protected RectTransform _footerButtonsParent;
 
         [SerializeField]
         private float _openAnimationDuration = 0.4f;
-
-        /// <summary>
-        ///     ダイアログの結果を待機するオブジェクト.
-        /// </summary>
-        private readonly UniTaskCompletionSource<DialogResult> _dialogResultAwaiter = new();
 
         public abstract void Initialize(TInitializeData initializeData);
 
@@ -77,22 +78,6 @@ namespace MOB.Framework.Game2D.UI
         }
 
         /// <summary>
-        ///     ダイアログを開きます.
-        /// </summary>
-        /// <param name="ct">キャンセルトークン.</param>
-        /// <returns>Open完了.</returns>
-        public UniTask OpenAsync(CancellationToken ct = default)
-        {
-            var rect = GetComponent<RectTransform>();
-            // アニメーション準備.
-            rect.localScale = Vector3.zero;
-
-            return rect
-                .DOScale(Vector3.one, _openAnimationDuration)
-                .ToUniTask(cancellationToken: ct);
-        }
-
-        /// <summary>
         ///     ダイアログを閉じます.
         /// </summary>
         /// <param name="ct">キャンセルトークン.</param>
@@ -110,6 +95,42 @@ namespace MOB.Framework.Game2D.UI
             return rect
                 .DOScale(Vector3.zero, _openAnimationDuration)
                 .ToUniTask(cancellationToken: ct);
+        }
+
+        /// <summary>
+        ///     ダイアログを開きます.
+        /// </summary>
+        /// <param name="ct">キャンセルトークン.</param>
+        /// <returns>Open完了.</returns>
+        public UniTask OpenAsync(CancellationToken ct = default)
+        {
+            var rect = GetComponent<RectTransform>();
+            // アニメーション準備.
+            rect.localScale = Vector3.zero;
+
+            return rect
+                .DOScale(Vector3.one, _openAnimationDuration)
+                .ToUniTask(cancellationToken: ct);
+        }
+
+        /// <summary>
+        ///     ボタンを追加します.
+        /// </summary>
+        /// <param name="buttonData">ボタン設定データ.</param>
+        protected void AddButton(ButtonData buttonData)
+        {
+            var prefab = Resources.Load<CustomButton>("");
+            CustomButton button = Instantiate(prefab, _footerButtonsParent);
+            button.Initialize(buttonData);
+        }
+
+        /// <summary>
+        ///     複数ボタンを追加します.
+        /// </summary>
+        /// <param name="buttonDataList">ボタン設定データリスト.</param>
+        protected void AddButtons(IReadOnlyList<ButtonData> buttonDataList)
+        {
+            foreach (ButtonData buttonData in buttonDataList) AddButton(buttonData);
         }
 
         /// <summary>
