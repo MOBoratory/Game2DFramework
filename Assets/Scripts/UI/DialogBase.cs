@@ -20,20 +20,23 @@ namespace MOB.Framework.Game2D.UI
     /// </summary>
     public enum DialogButtonType
     {
-        /// <summary> 肯定ボタン. </summary>
+        /// <summary>
+        ///     肯定ボタン.
+        ///     NOTE: OKボタン等.
+        /// </summary>
         Positive = 0,
 
-        /// <summary> 否定ボタン. </summary>
+        /// <summary>
+        ///     否定ボタン.
+        ///     NOTE: Cancelボタン等.
+        /// </summary>
         Negative = 1,
 
-        /// <summary> その他のボタン. </summary>
-        Other1 = 1000,
-
-        /// <summary> その他のボタン. </summary>
-        Other2 = 1001,
-
-        /// <summary> その他のボタン. </summary>
-        Other3 = 1002
+        /// <summary>
+        ///     その他のボタン.
+        ///     NOTE: 閉じるボタン、要素選択ボタン等.
+        /// </summary>
+        Other1 = 999
     }
 
     /// <summary>
