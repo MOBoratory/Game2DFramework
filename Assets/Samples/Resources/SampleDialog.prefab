@@ -36,6 +36,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleDialog
       objectReference: {fileID: 0}
+    - target: {fileID: 2513063193098552049, guid: e013c9142d06f4e7ea0585195ae6c2f5, type: 3}
+      propertyPath: m_MinWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513063193098552049, guid: e013c9142d06f4e7ea0585195ae6c2f5, type: 3}
+      propertyPath: m_MinHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513063193098552049, guid: e013c9142d06f4e7ea0585195ae6c2f5, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513063193098552049, guid: e013c9142d06f4e7ea0585195ae6c2f5, type: 3}
+      propertyPath: m_PreferredHeight
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 3652946169948561461, guid: e013c9142d06f4e7ea0585195ae6c2f5, type: 3}
       propertyPath: m_Pivot.y
       value: 1
