@@ -21,16 +21,17 @@ namespace MOB.Framework.Game2D.Samples
             _showSampleDialogButton.OnClickAsObservable()
                 .Subscribe(async _ =>
                 {
-                    var dialogResult = DialogManager.ShowDialogAsync<SampleDialog, SampleDialog.InitializeData>(
-                        new SampleDialog.InitializeData
-                        {
-                            Title = string.Empty,
-                            Body = string.Empty,
-                            FooterButtonDataList = null
-                        },
-                        _dialogParent,
-                        gameObject.GetCancellationTokenOnDestroy()
-                    );
+                    var dialogResult =
+                        DialogManager.ShowDialogAsync<SampleDialogSizeL, SampleDialogSizeL.InitializeData>(
+                            new SampleDialogSizeL.InitializeData
+                            {
+                                Title = string.Empty,
+                                Body = string.Empty,
+                                FooterButtonDataList = null
+                            },
+                            _dialogParent,
+                            gameObject.GetCancellationTokenOnDestroy()
+                        );
                 })
                 .AddTo(this);
         }

@@ -6,7 +6,7 @@ namespace MOB.Framework.Game2D.Samples
     /// <summary>
     ///     サンプルダイアログ.
     /// </summary>
-    public sealed class SampleDialog : DialogBase<SampleDialog.InitializeData>
+    public sealed class SampleDialogSizeS : DialogBase<SampleDialogSizeS.InitializeData>
     {
         public struct InitializeData
         {
