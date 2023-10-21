@@ -18,6 +18,8 @@ namespace MOB.Framework.Game2D.Samples
 
         private void Awake()
         {
+            DialogManager.Initialize("Prefabs/Dialogs");
+
             _showSampleDialogButton.OnClickAsObservable()
                 .Subscribe(async _ =>
                 {
