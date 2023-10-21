@@ -11,6 +11,11 @@ namespace MOB.Framework.Game2D.UI
         where TInitializeData : struct
     {
         /// <summary>
+        ///     規定の初期化を行います.
+        /// </summary>
+        void InitializeCore();
+
+        /// <summary>
         ///     初期化を行います.
         /// </summary>
         /// <param name="initializeData">初期化用データ.</param>

@@ -45,6 +45,7 @@ namespace MOB.Framework.Game2D.UI
             var prefab = Resources.Load<TDialog>(prefabPath);
             TDialog dialog = GameObject.Instantiate(prefab, parent);
             // ダイアログを初期化します.
+            dialog.InitializeCore();
             dialog.Initialize(initializeData);
 
             return dialog.ShowAsync(ct);

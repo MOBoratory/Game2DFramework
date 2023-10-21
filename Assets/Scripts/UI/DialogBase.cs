@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using UniRx;
 using UnityEngine;
 
 namespace MOB.Framework.Game2D.UI
@@ -52,6 +53,15 @@ namespace MOB.Framework.Game2D.UI
         /// </summary>
         private readonly UniTaskCompletionSource<DialogResult> _dialogResultAwaiter = new();
 
+        /// <summary>
+        ///     黒幕部分のタップ範囲ボタン.
+        /// </summary>
+        [SerializeField]
+        protected CustomButton _modalTapAreaButton;
+
+        [SerializeField]
+        protected RectTransform _layout;
+
         [SerializeField]
         protected RectTransform _footerButtonsParent;
 
@@ -63,6 +73,14 @@ namespace MOB.Framework.Game2D.UI
         /// </summary>
         /// <param name="initializeData">初期化用データ.</param>
         public abstract void Initialize(TInitializeData initializeData);
+
+        public void InitializeCore()
+        {
+            _modalTapAreaButton
+                .OnClickAsObservable()
+                .Subscribe(_ => CloseAsync().Forget())
+                .AddTo(this);
+        }
 
         /// <summary>
         ///     表示します.
@@ -86,19 +104,19 @@ namespace MOB.Framework.Game2D.UI
         /// </summary>
         /// <param name="ct">キャンセルトークン.</param>
         /// <returns>Close完了.</returns>
-        public UniTask CloseAsync(CancellationToken ct = default)
+        public async UniTask CloseAsync(CancellationToken ct = default)
         {
-            var rect = GetComponent<RectTransform>();
-
-            if (rect.localScale == Vector3.zero)
+            if (_layout.localScale == Vector3.zero)
             {
                 // 既に閉じている場合は即結果を返す.
-                return UniTask.CompletedTask;
+                return;
             }
 
-            return rect
+            await _layout
                 .DOScale(Vector3.zero, _openAnimationDuration)
                 .ToUniTask(cancellationToken: ct);
+
+            Destroy(gameObject);
         }
 
         /// <summary>
@@ -108,11 +126,10 @@ namespace MOB.Framework.Game2D.UI
         /// <returns>Open完了.</returns>
         public UniTask OpenAsync(CancellationToken ct = default)
         {
-            var rect = GetComponent<RectTransform>();
             // アニメーション準備.
-            rect.localScale = Vector3.zero;
+            _layout.localScale = Vector3.zero;
 
-            return rect
+            return _layout
                 .DOScale(Vector3.one, _openAnimationDuration)
                 .ToUniTask(cancellationToken: ct);
         }
