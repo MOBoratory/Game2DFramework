@@ -41,7 +41,7 @@ namespace MOB.Framework.Game2D.UI
             where TDialog : Object, IDialog<TInitializeData>
         {
             // ダイアログを生成します.
-            var prefabPath = Path.Combine(PrefabDirectoryPath, nameof(TDialog));
+            var prefabPath = Path.Combine(PrefabDirectoryPath, typeof(TDialog).Name);
             var prefab = Resources.Load<TDialog>(prefabPath);
             TDialog dialog = GameObject.Instantiate(prefab, parent);
             // ダイアログを初期化します.
